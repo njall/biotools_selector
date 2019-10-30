@@ -5,19 +5,38 @@
   </head>
   <body>
     <div>
-      <h1>Demo: BioTools Selector</h1>
-
-      <input id='element'
-          data-hidden-id='#my-hidden-element'></input>
-      <div id='my-hidden-element' style="display:none"></div>
-
+      <div class="container">
+        <div class="section">
+          <h1>Demo: BioTools Selector</h1>
+          <h3>Selector</h3>
+          <select id='element'
+              data-hidden-id='#my-hidden-element'></select>
+             <div id='my-hidden-element'></div>
+        </div>
+      
+        <br>
+        <div class="section">
+            <h3>Returned Data</h3>
+            <div id='biotools-output'></div>
+        </div>
+      </div>
     </div>
-  <script src="./bundle.js"></script>
+    </div>
   
-  <script>
-    
-    var selector = new BioToolsSelector('#element', null)
-    
+    <script src="./build.js"></script>
+    <script>    
+      let biotools_search = new BioToolsSelector('#element', null);
+
+      
+      // For display purposes
+      let output_element = document.getElementById('biotools-output');
+
+      biotools_search.selector.passedElement.addEventListener('choice', function(event){
+        output_element.textContent = JSON.stringify(event.detail.choice.customProperties.element, null, 2);
+      })
+      
+
+
   </script>
   </body>
 </html>

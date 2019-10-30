@@ -38,20 +38,32 @@ export default class BioToolsSelector {
 
         let self = this;
 
-        this.dropdown_element.addEventListener('change', function(event){
-            self.value_element.setAttribute("value", event.detail.value);
+        this.dropdown_element.addEventListener('choice', function(event){
+            self.value_element.setAttribute("data-value", event.detail.value);
+            self.value_element.setAttribute("data-name", event.detail.label);
         });
         
         //When user types into the search area: query biotools or load from cache, and display results.
         this.dropdown_element.addEventListener('search', function(){
             clearTimeout(self.lookupTimeout);
-            lookupTimeout = setTimeout(()=>{self.query({'q': self.selector.input.value})}, self.lookupDelay);
+            self.lookupTimeout = setTimeout(()=>{self.query({'q': self.selector.input.value})}, self.lookupDelay);
         });
         
     }
 
     static populateChoices(selector, returned_choices){
-        selector.setChoices(returned_choices.list, 'biotoolsID', 'name', 'description', true);
+        var choices = []
+        returned_choices.list.forEach(function(element){
+            choices.push({ 
+                value: element.biotoolsID,
+                label: element.name,
+                customProperties: {
+                    element
+                }
+            })
+        
+        });
+        selector.setChoices(choices, 'value', 'label', true);
     }
 
     /* params:
@@ -73,10 +85,11 @@ export default class BioToolsSelector {
             if (query_url in this.lookupCache) {
                 BioToolsSelector.populateChoices(selector, this.lookupCache[query_url]);
             } else {
+                self = this
                 fetch(query_url)
                     .then(function(response) {
                         response.json().then(function(data) {
-                            lookupCache[query_url] = data;
+                            self.lookupCache[query_url] = data;
                             BioToolsSelector.populateChoices(selector, data);
                         });
                     })
