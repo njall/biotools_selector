@@ -1,0 +1,42 @@
+{
+  "name": "biotools_selector",
+  "version": "1.0.0",
+  "description": "Javascript dropdown field for searching and selecting biotools resources",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njall/biotools_selector.git"
+  },
+  "keywords": [
+    "biotools",
+    "elixir",
+    "dropdown",
+    "select"
+  ],
+  "author": "Niall Beard",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/njall/biotools_selector/issues"
+  },
+  "homepage": "https://github.com/njall/biotools_selector#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "choices.js": "^8.0.0"
+  }
+}
