@@ -16,7 +16,7 @@
       
         <br>
         <div class="section">
-            <h3>Returned Data</h3>
+            <h3>Selected Item Data</h3>
             <div id='biotools-output'></div>
         </div>
       </div>
@@ -25,13 +25,14 @@
   
     <script src="./build.js"></script>
     <script>    
-      let biotools_search = new BioToolsSelector('#element', null);
+      var biotools_search = new BioToolsSelector('#element', null);
 
       
       // For display purposes
-      let output_element = document.getElementById('biotools-output');
+      var output_element = document.getElementById('biotools-output');
 
-      biotools_search.selector.passedElement.addEventListener('choice', function(event){
+
+      biotools_search.selector.passedElement.element.addEventListener('choice', function(event){
         output_element.textContent = JSON.stringify(event.detail.choice.customProperties.element, null, 2);
       })
       
